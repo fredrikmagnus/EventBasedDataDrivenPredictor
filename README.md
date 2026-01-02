@@ -9,7 +9,7 @@ This repository represents preliminary investigation towards extending the data-
 
 $h(t) = \frac{1}{\tau} e^{-t/\tau} u(t)$,
 
-where $\tau$ is the time-constant of the filter and $u(t)$ is the unit step function. Considering $n$ spike trains we denote the spike times as $t_k, k=1,2,...$ and define $x_k := x(t_k) \in \left\{0, 1\right\}^n$ as the binary vector signifying which neuron spiked at time $t_k$. Correspondingly we define $z_k := (h*x)(t_k)$ as the vector of exponential traces at time $t_k$, with $z_k^-$ and $z_k^+$ denoting the traces immediately before and after the spike event at time $t_k$. 
+where $\tau$ is the time-constant of the filter and $u(t)$ is the unit step function. Considering $n$ spike trains we denote the spike times as $t_k, k=1,2,...$ and define $x_k := x(t_k) \in \left\lbrace 0,1 \right\rbrace^n$ as the binary vector signifying which neuron spiked at time $t_k$. Correspondingly we define $z_k := (h*x)(t_k)$ as the vector of exponential traces at time $t_k$, with $z_k^-$ and $z_k^+$ denoting the traces immediately before and after the spike event at time $t_k$. 
 
 The predictor implemented here is expressed as:
 
