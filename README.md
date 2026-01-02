@@ -45,7 +45,7 @@ The figure below shows the predictor learning to predict the next spike over a r
 | ![Response](./Figures/Predictions_uncentered.png) | ![Response_zoom](./Figures/Predictions_uncentered_zoom.png) |
 |:---:|:---:|
 
-The temporal evolution of the elements in the cross-covariance matrix $Cov(x_k, z_k^-)$ and the covariance matrix $Cov(z_k^+, z_k^+)$ are shown below. The statistics are characterised by large updates at spike times and no change in inter-spike intervals. The values converge to a stationary value due to the forgetting factor $\gamma$, giving a weighted average dominated by recent events.
+The temporal evolution of the elements in the cross-covariance matrix $Cov(x_k, z_k^-)$ and the covariance matrix $Cov(z_k^+, z_k^+)$ are shown below. The statistics are characterised by large updates at spike times and no change during inter-spike intervals. The values converge to a stationary value due to the forgetting factor $\gamma$, giving a weighted average dominated by recent events.
 
 | ![Response](./Figures/CovarianceMatrixEvolution.png) | ![Response_zoom](./Figures/CrossCovarianceMatrixEvolution.png) |
 |:---:|:---:|
