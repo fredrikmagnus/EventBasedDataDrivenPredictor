@@ -35,7 +35,7 @@ This shows that the model estimates the optimal least-squares linear predictor o
 
 $y(t_k) \approx Cov(\alpha_k x_{k+1}, z_k^+) Cov(z_k^+, z_k^+)^{-1} z_k^+$ = $E[\alpha_k x_{k+1} | z_k^+]$.
 
-I.e. based on entirely local-in-time samples and event-based running covariance estimates, the model learns to predict *the next event* given a fading-memory internal state encoding past events.
+I.e. based on entirely local-in-time samples and event-based running covariance estimates, the model learns to predict *the next event*, given a fading-memory internal state encoding past events.
 
 ## Experimental results
 A simple example is used to demonstrate the capability of the event-based predictor to learn causal relationships between spike-trains. In this example, three input spike-trains are generated with a deterministic periodic pattern, with spikes occurring every second but with phases offset 50ms from each other. The kernel employs a time-constant of 150ms, giving an overlap between the exponential traces within a burst of spikes but a decay to near-zero between bursts. The forgetting factor is set to $\gamma = 0.9$ and ridge-regularization to $\lambda = 10^{-4}$. The time-step for updating the exponential traces is set to 1ms for plotting purposes, and a prediction is made at every time-step. It is, however, possible to jump directly between event times by decaying the exponential traces appropriately according to the time-difference between events.
