@@ -21,7 +21,7 @@ $Cov(x_k, z_k^-) \leftarrow \gamma Cov(x_k, z_k^-) + (1-\gamma) x_k z_k^{-\top}$
 
 $Cov(z_k^+, z_k^+) \leftarrow \gamma Cov(z_k^+, z_k^+) + (1-\gamma) (z_k^+ z_k^{+\top} + \lambda I)$,
 
-with $\gamma \in (0,1)$ being a forgetting factor, weighting recently observed events more heavily and allowing adaptation to non-stationary statistics. A small ridge-regularization term $\lambda I$ is necessary for numerical stability when inverting the covariance matrix. 
+with $\gamma \in (0,1)$ being a forgetting factor, weighting recently observed events more heavily and enabling adaptation to non-stationary statistics. A small ridge-regularization term $\lambda I$ is necessary for numerical stability when inverting the covariance matrix. 
 
 An interpretation of the output prediction comes from the fact that the trace vector decays passively between events. The passive decay property implies $z_{k+1}^- = \alpha_k z_k^+$, with $\alpha_k = e^{-(t_{k+1}-t_k)/\tau}$. Hence we can express the cross-covariance as
 
