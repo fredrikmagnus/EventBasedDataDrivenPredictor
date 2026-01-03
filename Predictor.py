@@ -13,7 +13,7 @@ class Predictor:
         self.mean = np.zeros(n_inputs) # Event-based mean
         self.z = np.zeros(n_inputs) # Centered traces
 
-        self.Cov = np.zeros((n_inputs, n_inputs))
+        self.Cov = self.lambda_ridge * np.eye(n_inputs)
         self.CrossCov = np.zeros((n_inputs, n_inputs))
         self.P = self.lambda_ridge * np.eye(n_inputs)
 
