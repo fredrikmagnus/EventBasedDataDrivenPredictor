@@ -85,7 +85,7 @@ def plot_gains(time, PredictionGains):
             plt.step(time, PredictionGains[i, j, :], label=f'[{i}, {j}]')
     plt.xlabel('Time')
     plt.ylabel('Prediction Gain Values')
-    plt.title('Evolution of Prediction Gain Matrix Elements Over Time')
+    plt.title(r'Gain Matrix $\text{Cov}(x_k, z_k^-)\text{Cov}(z_k^+, z_k^+)^{-1}$ Elements Over Time')
     plt.legend()
     plt.grid()
     plt.show()

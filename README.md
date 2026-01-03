@@ -40,7 +40,7 @@ I.e. based on entirely local-in-time samples and event-based running covariance 
 ## Experimental results
 A simple example is used to demonstrate the capability of the event-based predictor to learn causal relationships between spike-trains. In this example, three input spike-trains are generated with a deterministic periodic pattern, with spikes occurring every second but with phases offset 50ms from each other. The kernel employs a time-constant of 150ms, giving an overlap between the exponential traces within a burst of spikes but a decay to near-zero between bursts. The forgetting factor is set to $\gamma = 0.9$ and ridge-regularization to $\lambda = 10^{-4}$. The time-step for updating the exponential traces is set to 1ms for plotting purposes, and a prediction is made at every time-step. It is, however, possible to jump directly between event times by decaying the exponential traces appropriately according to the time-difference between events.
 
-The figure below shows the predictor learning to predict the next spike over a roughly 10 second simulation, with an adequate prediction after seeing the pattern only once. The left plot shows the full prediction over time, with a raster of the input spikes below. The right plot gives a zoomed-in view. We see that the predictions for the second spike peaks after seeing the first spike, and similarly for the third spike after seeing the second spike. The first spike is not predicted due to the fading-memory traces decaying to near-zero before the first spike in the pattern occurs.
+The figure below shows the predictor learning to predict the next spike over a roughly 10 second simulation, with an adequate prediction after seeing the pattern only once. The left plot shows the full prediction over time, with a raster of the input spikes below. The right plot gives a zoomed-in view. We see that the predictions for the second spike peaks after seeing the first spike, and similarly for the third spike after seeing the second spike. An interpretation is that the model learns that seeing the first and second spike is predictive, has a *causal effect*, on the second and third spike respectively. The first spike is not predicted due to the fading-memory traces decaying to near-zero before the first spike in the pattern occurs. No spikes have a causal effect on the first spike within the temporal window defined by the kernel time-constant.
 
 | ![Response](./Figures/Predictions_uncentered.png) | ![Response_zoom](./Figures/Predictions_uncentered_zoom.png) |
 |:---:|:---:|
@@ -50,3 +50,18 @@ The temporal evolution of the elements in the cross-covariance matrix $Cov(x_k, 
 | ![Response](./Figures/CovarianceMatrixEvolution.png) | ![Response_zoom](./Figures/CrossCovarianceMatrixEvolution.png) |
 |:---:|:---:|
 
+
+Centering the traces by an event-based estimate of the mean trace value before spikes occur has also been empirically observed to enable anticipatory predictions of spikes. The figure below shows the predictions when centering is enabled, showing that the first spike is now also anticipated.
+
+| ![Response](./Figures/Predictions_centered.png) | ![Response_zoom](./Figures/Predictions_centered_zoom.png) |
+|:---:|:---:|
+
+## Final remarks
+This implementation demonstrates that predictions of causal relationships between events can be made over extended time-periods based on data-driven and event-based methods with local-in-time sampling. This contrasts with traditional methods based on discrete time-steps and continuous trajectories. Moreover, estimating the causal relations between spikes opens up for a spiking controller which can estimate *the causal effect of its own spike* on the dynamics of a network of spiking neurons. This could enable the neuron to enact control over its neighbours and steer the network behaviour according to an optimization objective. 
+
+While the objective of individual neurons remain an open question, it is unlikely due to computational constraints that each neuron should aim to explicitly predict all incoming spikes. It could be plausible that a neuron instead predicts a cost-function associated with the incoming spikes and only implicitly predicts the incoming spiking activity. This would be similar to how typical data-driven controllers implicitly model the plant dynamics but only explicitly solve for the control actions minimizing a cost-function. 
+
+It is also important to note that the framework offered by the data-driven methodology relies on the assumption of linear relationships to enable recursive least-squares estimation of covariances. A hypothesis is therefore that a neuron could locally linearize the *external system* it interacts with around a preferred operating point, with global non-linear behaviour emerging through cooperation between multiple neurons.
+
+## Usage
+To run the example provided, run the `run.py` script. This will generate the first plots shown above. To enable centering of traces, change the `estimate_mean` parameter to `True` in the `Predictor` instantiation in `run.py`.
