@@ -51,11 +51,6 @@ The temporal evolution of the elements in the cross-covariance matrix $Cov(x_k, 
 |:---:|:---:|
 
 
-Centering the traces by an event-based estimate of the mean trace value before spikes occur has also been empirically observed to enable anticipatory predictions of spikes. The figure below shows the predictions when centering is enabled, showing that the first spike is now also anticipated.
-
-| ![Response](./Figures/Predictions_centered.png) | ![Response_zoom](./Figures/Predictions_centered_zoom.png) |
-|:---:|:---:|
-
 ## Final remarks
 This implementation demonstrates that predictions of causal relationships between events can be made over extended time-periods based on data-driven and event-based methods with local-in-time sampling. This contrasts with traditional methods based on discrete time-steps and continuous trajectories. Moreover, estimating the causal relations between spikes opens up for a spiking controller which can estimate *the causal effect of its own spike* on the dynamics of the spiking activity it observes. This could enable the neuron to enact control over its neighbours and steer the network behaviour according to an optimization objective. 
 
